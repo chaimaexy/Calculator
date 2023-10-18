@@ -48,8 +48,8 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent);
                     }
                     R.id.secondItem->{
-                      //  val intent = Intent(this@MainActivity, MainActivity3::class.java)
-                      //  startActivity(intent);
+                        val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                        startActivity(intent);
                     }
 
                 }
