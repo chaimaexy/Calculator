@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
 
-    <item
-        android:id="@+id/firstItem"
-        android:title="@string/normal"
-
-        />
-    <item
-        android:id="@+id/secondItem"
-        android:title="@string/scientifique" />
+        <item
+            android:id="@+id/standard"
+            android:icon="@drawable/standard_background"
+            android:title="Standard"
+            />
+        <item
+            android:id="@+id/scientifique"
+            android:icon="@drawable/baseline_reply_24"
+            android:title="Scientifique"
+            />
+    </group>
 </menu>

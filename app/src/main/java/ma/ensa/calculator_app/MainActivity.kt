@@ -8,64 +8,66 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.material.navigation.NavigationView
 import ma.ensa.calculator_app.databinding.ActivityMainBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
 import java.lang.ArithmeticException
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
+
     //menu
-    private lateinit var toggle: ActionBarDrawerToggle // to controle the nav to open or close
+  //  private lateinit var toggle: ActionBarDrawerToggle // to controle the nav to open or close
 
     private var lastNumber = false
     private var stateError = false
     private var lastDot = false
 
-
+    private lateinit var binding : ActivityMainBinding
     private lateinit var expression: Expression
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
+        val drawer: DrawerLayout =findViewById(R.id.drawerLayout)
+        val Navigation:NavigationView=findViewById(R.id.nav_view)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+
+        //setSupportActionBar(toolbar)
+
+        Navigation.bringToFront()
+        val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer.addDrawerListener(toggle)
+        toggle.syncState()
+
+        Navigation.setNavigationItemSelectedListener(this)
         //menu
-        binding.apply {
-            toggle = ActionBarDrawerToggle( this@MainActivity, drawerLayout, R.string.open, R.string.close )
-            drawerLayout.addDrawerListener(toggle)
-            toggle.syncState()
 
+    }
 
-            supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-            navView.setNavigationItemSelectedListener {
-                when(it.itemId){
-                    R.id.firstItem->{
-                        val intent = Intent(this@MainActivity, MainActivity::class.java)
-                        startActivity(intent);
-                    }
-                    R.id.secondItem->{
-                        val intent = Intent(this@MainActivity, MainActivity2::class.java)
-                        startActivity(intent);
-                    }
-
-                }
-                true
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.standard -> {
+                val intent = Intent(this,MainActivity::class.java)
+                startActivity(intent)
+            }
+            R.id.scientifique -> {
+                val intent = Intent(this,MainActivity2::class.java)
+                startActivity(intent)
             }
 
         }
+        val drawer: DrawerLayout = findViewById(R.id.drawerLayout)
+        drawer.closeDrawer(GravityCompat.START)
+
+        return false
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
-            true
-        }
-        return super.onOptionsItemSelected(item)
-
-    }
 
 
     fun onOperatorClick(view: View) {

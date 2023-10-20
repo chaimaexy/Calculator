@@ -63,5 +63,8 @@
     <string name="substract">-</string>
     <string name="_0">0</string>
     <string name="title_activity_main2">MainActivity2</string>
-
+    <string name="parenthis">(</string>
+    <string name="parenthisEnd">)</string>
+    <string name="navigation_drawer_open">open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
