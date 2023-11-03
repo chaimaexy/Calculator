@@ -30,17 +30,19 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         val Navigation:NavigationView=findViewById(R.id.nav_view)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
-        //setSupportActionBar(toolbar)
-
-        input = findViewById(R.id.input1)
-        output = findViewById(R.id.output1)
-        variable = ""
         Navigation.bringToFront()
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer.addDrawerListener(toggle)
         toggle.syncState()
 
         Navigation.setNavigationItemSelectedListener(this)
+        input = findViewById(R.id.input1)
+        output = findViewById(R.id.output1)
+        variable = ""
+
+
+
+      //  Navigation.setNavigationItemSelectedListener(this)
 
         val egale: Button = findViewById(R.id.egale1)
         val clearButton: Button = findViewById(R.id.C1)
@@ -214,7 +216,7 @@ class MainActivity2 : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            com.google.android.material.R.id.standard -> {
+            R.id.standard -> {
                 val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
             }

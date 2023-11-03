@@ -2,11 +2,14 @@ package ma.ensa.calculator_app;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import org.jetbrains.annotations.NotNull;
 
 class MyDatabaseHelper extends SQLiteOpenHelper {
     private Context context;
@@ -44,7 +47,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
-    void addAuth(String login,String password,String nom, String prenom){
+    void addAuth(String login,String password,String nom, String prenom, String role){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -52,7 +55,7 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_PASSWORD, password);
         cv.put(COLUMN_NOM, nom);
         cv.put(COLUMN_PRENOM, prenom);
-        cv.put(COLUMN_Role, "");
+        cv.put(COLUMN_Role, role);
         cv.put(COLUMN_OLDPASSWORD, "");
      
 
@@ -61,7 +64,49 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Failed!", Toast.LENGTH_SHORT).show();
         }else {
             Toast.makeText(context, "Succes!", Toast.LENGTH_SHORT).show();
+
         }
     }
 
+    public boolean authenticateUser(String login, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME +
+                " WHERE " + COLUMN_LOGIN + " = ?" +
+                " AND " + COLUMN_PASSWORD + " = ?";
+        Cursor cursor = db.rawQuery(query, new String[] {login, password});
+
+        boolean isAuthenticated = cursor.moveToFirst();
+
+        cursor.close();
+        db.close();
+
+        return isAuthenticated;
+    }
+
+
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+        if(db!= null){
+            cursor = db.rawQuery(query, null);
+        }
+        return cursor;
+    }
+    public boolean deleteElement(int elementId) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String whereClause = COLUMN_ID + " = ?";
+        String[] whereArgs = {String.valueOf(elementId)};
+
+        // Attempt to delete the record
+        int rowsDeleted = db.delete(TABLE_NAME, whereClause, whereArgs);
+        db.close();
+
+        // If one or more rows were deleted, return true; otherwise, return false
+        return rowsDeleted > 0;
+    }
+
+
 }
+

@@ -13,27 +13,36 @@
         android:theme="@style/Theme.Calculator_App"
         tools:targetApi="31">
         <activity
+            android:name=".HomePage"
+            android:exported="false"
+            android:label="My DataBase Application"/>
+        <activity
+            android:name=".RemoveActivity"
+            android:exported="true" >
+
+        </activity>
+        <activity
             android:name=".AddActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity3"
             android:exported="true"
             android:label="My DataBase Application" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity2"
             android:exported="true"
             android:label="@string/title_activity_main2"
-            android:theme="@style/Theme.Calculator_App" />
+            android:theme="@style/Theme.Calculator_App" >
+
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true" >
 
         </activity>
     </application>

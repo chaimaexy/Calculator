@@ -20,7 +20,7 @@ import java.lang.ArithmeticException
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
 
     //menu
-  //  private lateinit var toggle: ActionBarDrawerToggle // to controle the nav to open or close
+    //  private lateinit var toggle: ActionBarDrawerToggle // to controle the nav to open or close
 
     private var lastNumber = false
     private var stateError = false
@@ -30,15 +30,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var expression: Expression
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        val drawer: DrawerLayout =findViewById(R.id.drawerLayout)
-        val Navigation:NavigationView=findViewById(R.id.nav_view)
+        // Inflate the binding before setting the content view
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val drawer: DrawerLayout = findViewById(R.id.drawerLayout)
+        val Navigation: NavigationView = findViewById(R.id.nav_view)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
 
-        //setSupportActionBar(toolbar)
+        setSupportActionBar(toolbar)
 
         Navigation.bringToFront()
         val toggle = ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -46,10 +48,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         Navigation.setNavigationItemSelectedListener(this)
-        //menu
-
     }
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.standard -> {

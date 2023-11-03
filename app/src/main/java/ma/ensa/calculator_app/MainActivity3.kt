@@ -3,36 +3,44 @@ package ma.ensa.calculator_app
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputEditText
 
 
 class MainActivity3 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        var isLayoutVisible = false
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main3)
-        var add_button: FloatingActionButton
-        var layout1: FrameLayout
-        var addElement: FloatingActionButton
-        var removeElement: FloatingActionButton
 
-        add_button = findViewById<FloatingActionButton>(R.id.add_button)
+        val emailInput = findViewById<TextInputEditText>(R.id.emailInput)
+        val passwordInput = findViewById<TextInputEditText>(R.id.passwordInput)
+        val loginButton = findViewById<Button>(R.id.Valider)
 
-        layout1 = findViewById<FrameLayout>(R.id.layout1) // Replace with the actual ID of your layout
-        addElement = findViewById<FloatingActionButton>(R.id.add_User)
-        removeElement = findViewById<FloatingActionButton>(R.id.remove_User)
+        loginButton.setOnClickListener {
+            // Get the entered email and password
+            val email = emailInput.text.toString()
+            val password = passwordInput.text.toString()
 
-        add_button.setOnClickListener {
-            isLayoutVisible = !isLayoutVisible
-            layout1.visibility = if (isLayoutVisible) View.VISIBLE else View.GONE
-        }
-        addElement.setOnClickListener{
-            val intent = Intent(this, AddActivity::class.java)
-            startActivity(intent)
+            val databaseHelper = MyDatabaseHelper(this)
+            val isAuthenticated = databaseHelper.authenticateUser(email, password)
+
+            if (isAuthenticated) {
+
+                val intent = Intent(this, HomePage::class.java)
+                startActivity(intent)
+            } else {
+                // Authentication failed, show a toast message
+                Toast.makeText(this, "Authentication failed. Please check your credentials.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
+
 }

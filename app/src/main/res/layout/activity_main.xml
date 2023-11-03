@@ -6,7 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    >
+
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
@@ -15,18 +17,21 @@
         app:menu="@menu/nav_menu"
         android:layout_gravity="start"
         />
+
     <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="?attr/actionBarSize"
             android:id="@+id/toolbar"
             android:layout_gravity="start"
-
-            />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -82,39 +87,7 @@
                 android:layout_height="1dp"
                 android:background="@color/linecolor" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="horizontal">
 
-                <com.google.android.material.button.MaterialButton
-                    style="@style/digitbutton"
-                    android:backgroundTint="@color/btnBackground"
-                    android:onClick="onOperatorClick"
-                    android:text="@string/mc"
-                    android:textSize="16sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/digitbutton"
-                    android:backgroundTint="@color/btnBackground"
-                    android:onClick="onOperatorClick"
-                    android:text="@string/mr"
-                    android:textSize="16sp" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/digitbutton"
-                    android:backgroundTint="@color/btnBackground"
-                    android:onClick="onOperatorClick"
-                    android:text="@string/m" />
-
-                <com.google.android.material.button.MaterialButton
-                    style="@style/digitbutton"
-                    android:backgroundTint="@color/btnBackground"
-                    android:onClick="onOperatorClick"
-                    android:text="@string/m_minus" />
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
