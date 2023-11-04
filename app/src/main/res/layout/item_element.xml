@@ -3,6 +3,7 @@
 <!-- item_user.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -22,9 +23,10 @@
                 android:id="@+id/textViewName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="28sp"
+                android:layout_marginTop="20dp"
+                android:text="nom"
                 android:textColor="@color/black"
-                android:text="nom"/>
+                android:textSize="28sp" />
 
             <TextView
                 android:id="@+id/textViewRole"
@@ -34,6 +36,14 @@
                 android:textColor="@color/black"
                 android:text="role"/>
 
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="email"
+                android:textColor="@color/red_light"
+                android:textSize="20sp" />
+
         </LinearLayout>
 
         <ImageButton
@@ -42,15 +52,15 @@
             android:layout_height="50dp"
             android:src="@drawable/delete"
             android:contentDescription="Delete" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textViewEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@color/red_light"
-        android:text="email"/>
+        <androidx.constraintlayout.widget.Barrier
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:outlineAmbientShadowColor="#070202"
+            android:outlineSpotShadowColor="#000000"
+            app:barrierDirection="top" />
+
+    </LinearLayout>
 
     <!-- You can add more UI components here, like buttons, images, etc. -->
 

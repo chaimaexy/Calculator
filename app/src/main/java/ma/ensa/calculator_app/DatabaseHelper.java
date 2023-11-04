@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,8 +21,8 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_ID = "_id";
     private static final String COLUMN_LOGIN = "login";
     private static final String COLUMN_PASSWORD = "password";
-    private static final String COLUMN_NOM = "nom";
-    private static final String COLUMN_PRENOM = "prenom";
+    public static final String COLUMN_NOM = "nom";
+    public static final String COLUMN_PRENOM = "prenom";
     private static final String COLUMN_Role = "role";
     private static final String COLUMN_OLDPASSWORD = "old_password";
     public MyDatabaseHelper(@Nullable Context context) {
@@ -68,19 +69,16 @@ class MyDatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    public boolean authenticateUser(String login, String password) {
+    public Cursor authenticateUser(String login, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + TABLE_NAME +
+        String query = "SELECT " + COLUMN_NOM + ", " + COLUMN_PRENOM +
+                " FROM " + TABLE_NAME +
                 " WHERE " + COLUMN_LOGIN + " = ?" +
                 " AND " + COLUMN_PASSWORD + " = ?";
         Cursor cursor = db.rawQuery(query, new String[] {login, password});
 
-        boolean isAuthenticated = cursor.moveToFirst();
 
-        cursor.close();
-        db.close();
-
-        return isAuthenticated;
+        return cursor;
     }
 
 

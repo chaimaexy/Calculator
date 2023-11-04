@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
@@ -48,9 +49,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         Navigation.setNavigationItemSelectedListener(this)
+        //
+        val firstName = intent.getStringExtra("firstName")
+        val lastName = intent.getStringExtra("lastName")
+
+        if (firstName != null && lastName != null) {
+            // You have the first name and last name, so you can set them in the TextView
+            val identif = findViewById<TextView>(R.id.identif)
+            identif.text = "$firstName $lastName"
+        }
     }
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.home -> {
+                val intent = Intent(this,HomePage::class.java)
+                startActivity(intent)
+            }
             R.id.standard -> {
                 val intent = Intent(this,MainActivity::class.java)
                 startActivity(intent)
@@ -59,12 +73,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 val intent = Intent(this,MainActivity2::class.java)
                 startActivity(intent)
             }
+            R.id.logout -> {
+                navigateToAuthenticationPage()
+                true
+            }
 
         }
         val drawer: DrawerLayout = findViewById(R.id.drawerLayout)
         drawer.closeDrawer(GravityCompat.START)
 
         return false
+    }
+
+    private fun navigateToAuthenticationPage() {
+
+        val intent = Intent(this, MainActivity3::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish() // Close the current activity
     }
 
 

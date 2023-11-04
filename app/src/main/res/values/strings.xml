@@ -80,5 +80,6 @@
     <string name="add">add</string>
     <string name="login">login</string>
     <string name="AddUser">Add User</string>
+    <string name="logout">Logout</string>
 
 </resources>
