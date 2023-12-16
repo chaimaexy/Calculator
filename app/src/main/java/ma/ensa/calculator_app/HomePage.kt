@@ -15,8 +15,10 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class HomePage : AppCompatActivity() , NavigationView.OnNavigationItemSelectedListener{
+    private lateinit var auth :FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         var isLayoutVisible = false
         super.onCreate(savedInstanceState)
@@ -57,6 +59,9 @@ class HomePage : AppCompatActivity() , NavigationView.OnNavigationItemSelectedLi
             val intent = Intent(this, RemoveActivity::class.java)
             startActivity(intent)
         }
+        //
+        auth = FirebaseAuth.getInstance()
+
         /* writing the user name in the title
         val firstName = intent.getStringExtra("firstName")
         val lastName = intent.getStringExtra("lastName")
@@ -87,7 +92,10 @@ class HomePage : AppCompatActivity() , NavigationView.OnNavigationItemSelectedLi
                 startActivity(intent)
             }
             R.id.logout -> {
-                navigateToAuthenticationPage()
+                FirebaseAuth.getInstance().signOut()
+                val i = Intent(this,FirstPage::class.java)
+                startActivity(i)
+               // navigateToAuthenticationPage()
                 true
             }
 

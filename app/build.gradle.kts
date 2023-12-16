@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -35,6 +36,7 @@ android {
         dataBinding = true
 
     }
+
     compileOptions {
 
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -76,6 +78,10 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.3")
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
+    implementation("com.google.firebase:firebase-auth:22.3.0")
+    //implementation("com.google.firebase:firebase-auth:22.2.0")
+    //implementation("com.google.android.gms:play-services-auth:20.7.0")
+
 
 
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
@@ -90,4 +96,9 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("com.readystatesoftware.sqliteasset:sqliteassethelper:+")
+
+
+
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
 }

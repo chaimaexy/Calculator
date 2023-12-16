@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:layout_gravity="center_vertical"
     tools:context=".HomePage"
-    tools:openDrawer="start"
    >
 
     <com.google.android.material.navigation.NavigationView
@@ -34,7 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/HomeText"
             android:layout_width="240dp"
             android:layout_height="76dp"
             android:layout_marginTop="100dp"
